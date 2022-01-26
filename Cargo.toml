@@ -1,0 +1,24 @@
+[package]
+authors = ["Stefan Kerkmann <karlk90@pm.me>"]
+edition = "2021"
+readme = "README.md"
+name = "tinyuf2-unlocker"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = "0.7.4"
+cortex-m-rt = "0.7.1"
+panic-halt = "0.2.0"
+stm32f4 = { version = "0.14.0", features = ["stm32f411", "rt"] }
+
+# this lets you use `cargo fix`!
+[[bin]]
+name = "tinyuf2-unlocker"
+test = false
+bench = false
+
+[profile.release]
+opt-level = "z"   # smallest code size
+codegen-units = 1 # better optimizations
+debug = true      # symbols are nice and they don't increase the size on Flash
+lto = true        # better optimizations
