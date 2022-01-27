@@ -30,14 +30,14 @@ fn main() -> ! {
         if cr.read().lock().bit_is_set() {
             keyr.write(|w| w.key().bits(FLASH_KEY1));
             keyr.write(|w| w.key().bits(FLASH_KEY2));
-            assert!(cr.read().lock().bit_is_clear());
+            debug_assert!(cr.read().lock().bit_is_clear());
         }
 
         // Unlock option bytes
         if optcr.read().optlock().bit_is_set() {
             optkeyr.write(|w| w.optkey().bits(FLASH_OPT_KEY1));
             optkeyr.write(|w| w.optkey().bits(FLASH_OPT_KEY2));
-            assert!(optcr.read().optlock().bit_is_clear());
+            debug_assert!(optcr.read().optlock().bit_is_clear());
         }
 
         // Unprotect flash sectors if it is necessary
@@ -53,11 +53,11 @@ fn main() -> ! {
 
         // Lock option bytes again
         optcr.modify(|_, w| w.optlock().set_bit());
-        assert!(optcr.read().optlock().bit_is_set());
+        debug_assert!(optcr.read().optlock().bit_is_set());
 
         // Lock flash again
         cr.modify(|_, w| w.lock().set_bit());
-        assert!(cr.read().lock().bit_is_set());
+        debug_assert!(cr.read().lock().bit_is_set());
     });
 
     // Jump to STM32-DFU bootloader in ROM
