@@ -1,6 +1,6 @@
 # TinyUF2 flash unlocker for STM32F411 (easily adaptable to other STM32F4xx)
 
-This small program is meant to unlock the first 4 (=64kb) flash sectors that are occupied by the TinyUF2 bootloader, if they have been locked by it. After the unlock procedure it jumps to the built-in DFU bootloader of the STM32F4 MCUs. This is useful for e.g. self-updating the TinyUF2 bootloader or replacing it with something else.
+This small program is meant to unlock the first 2 (=32kb) flash sectors that are occupied by the TinyUF2 bootloader, if they have been locked by it. After the unlock procedure it jumps to the built-in DFU bootloader of the STM32F4 MCUs. This is useful for e.g. self-updating the TinyUF2 bootloader or replacing it with something else.
 
 ## Usage
 

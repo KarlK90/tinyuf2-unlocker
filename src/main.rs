@@ -23,12 +23,12 @@ fn main() -> ! {
         let optkeyr = &flash.optkeyr;
 
         // Unprotect flash sectors if it is necessary
-        if (optcr.read().n_wrp().bits() & FLASH_SECTORS_MASK) != FLASH_SECTORS_MASK {
+        if optcr.read().n_wrp().bits() != FLASH_SECTORS_MASK {
             // Unlock option bytes
             if optcr.read().optlock().bit_is_set() {
                 optkeyr.write(|w| w.optkey().bits(FLASH_OPT_KEY1));
                 optkeyr.write(|w| w.optkey().bits(FLASH_OPT_KEY2));
-                assert!(optcr.read().optlock().bit_is_clear());
+                debug_assert!(optcr.read().optlock().bit_is_clear());
             }
 
             // Wait for any flash operations to complete
